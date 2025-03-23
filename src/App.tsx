@@ -200,10 +200,10 @@ function App() {
     };
 
     const dragonImages = {
-      'hungry': "/dragon_math/images/Dragon.png",
-      'happy': "/dragon_math/images/HappyDragon.png",
-      'sad': "/dragon_math/images/SadDragon.png",
-      'super-happy': "/dragon_math/images/SuperHappyDragon.png"
+      'hungry': "/images/Dragon.png",
+      'happy': "/images/HappyDragon.png",
+      'sad': "/images/SadDragon.png",
+      'super-happy': "/images/SuperHappyDragon.png"
     };
 
     return (
