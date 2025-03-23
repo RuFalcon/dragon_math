@@ -45,11 +45,6 @@ npm start
 npm run dev
 ```
 
-## Развертывание на GitHub Pages
-
-После успешного развертывания, ваше приложение будет доступно по адресу:
-`https://rufalcon.github.io/dragon_math/`
-
 ## Лицензия
 
 MIT 
