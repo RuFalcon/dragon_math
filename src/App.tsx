@@ -200,10 +200,10 @@ function App() {
     };
 
     const dragonImages = {
-      'hungry': "https://rufalcon.github.io/dragon_math/images/Dragon.png",
-      'happy': "https://rufalcon.github.io/dragon_math/images/HappyDragon.png",
-      'sad': "https://rufalcon.github.io/dragon_math/images/SadDragon.png",
-      'super-happy': "https://rufalcon.github.io/dragon_math/images/SuperHappyDragon.png"
+      'hungry': "/dragon_math/images/Dragon.png",
+      'happy': "/dragon_math/images/HappyDragon.png",
+      'sad': "/dragon_math/images/SadDragon.png",
+      'super-happy': "/dragon_math/images/SuperHappyDragon.png"
     };
 
     return (
