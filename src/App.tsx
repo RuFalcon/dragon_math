@@ -326,7 +326,7 @@ const App: React.FC = () => {
 
           <div className="flex flex-col items-center gap-2 sm:gap-4 bg-white/90 p-3 sm:p-6 rounded-xl shadow-2xl backdrop-blur-sm">
             {problem && (
-              <div className="text-center">
+              <div className="text-center w-full">
                 <div className="text-2xl sm:text-3xl font-bold text-blue-800 mb-2 sm:mb-3">
                   {problem.a} {problem.operator} {problem.b} = ?
                 </div>
@@ -334,7 +334,7 @@ const App: React.FC = () => {
                   type="text"
                   value={answer}
                   readOnly
-                  className="w-20 sm:w-28 text-2xl sm:text-3xl text-center bg-white rounded-lg py-1 sm:py-1.5 px-2 sm:px-3 shadow-lg mb-2 sm:mb-3"
+                  className="w-24 sm:w-32 text-2xl sm:text-3xl text-center bg-white rounded-lg py-1 sm:py-1.5 px-2 sm:px-3 shadow-lg mb-2 sm:mb-3"
                   placeholder="?"
                 />
                 {isCorrect !== null && (
@@ -346,27 +346,27 @@ const App: React.FC = () => {
               </div>
             )}
 
-            <div className="grid grid-cols-3 gap-1 w-full max-w-[280px] sm:max-w-xs">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-[320px] sm:max-w-md">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
                 <button
                   key={num}
                   onClick={() => handleNumberClick(num)}
-                  className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
+                  className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 sm:py-4 px-3 sm:px-5 rounded-lg text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
                 >
                   {num}
                 </button>
               ))}
               <button
                 onClick={handleDelete}
-                className="bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                className="bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 sm:py-4 px-3 sm:px-5 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
               >
-                <Delete className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Delete className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
               <button
                 onClick={handleCheck}
-                className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
+                className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 px-3 sm:px-5 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
               >
-                <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Check className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
           </div>
