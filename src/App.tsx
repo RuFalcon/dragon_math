@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Heart, 
   Apple, 
@@ -35,7 +35,7 @@ const sounds = {
   click: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3'] })
 };
 
-function App() {
+const App: React.FC = () => {
   const [gameState, setGameState] = useState<GameState>('start');
   const [level, setLevel] = useState(() => Number(localStorage.getItem('level')) || 1);
   const [coins, setCoins] = useState(() => Number(localStorage.getItem('coins')) || 0);
@@ -223,32 +223,6 @@ function App() {
     );
   };
 
-  const renderKeypad = () => (
-    <div className="grid grid-cols-3 gap-1.5 w-full max-w-xs">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
-        <button
-          key={num}
-          onClick={() => handleNumberClick(num)}
-          className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
-        >
-          {num}
-        </button>
-      ))}
-      <button
-        onClick={handleDelete}
-        className="bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
-      >
-        <Delete className="w-5 h-5" />
-      </button>
-      <button
-        onClick={handleCheck}
-        className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
-      >
-        <Check className="w-5 h-5" />
-      </button>
-    </div>
-  );
-
   if (gameState === 'start') {
     return (
       <div className="h-screen overflow-hidden bg-gradient-to-br from-sky-400 via-sky-300 to-sky-200 flex flex-col items-center justify-center p-4">
@@ -316,21 +290,21 @@ function App() {
     <div className="h-screen overflow-hidden bg-gradient-to-br from-sky-400 via-sky-300 to-sky-200 flex flex-col items-center p-2">
       <div className="w-full max-w-6xl h-full flex flex-col">
         <div className="flex justify-between items-center mb-2 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-lg">
-          <div className="flex items-center gap-2">
-            <div className="bg-yellow-100 p-1.5 rounded-lg">
-              <Trophy className="w-5 h-5 text-yellow-500" />
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="bg-yellow-100 p-1 sm:p-1.5 rounded-lg">
+              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
             </div>
-            <span className="text-lg font-bold text-yellow-700">{coins}</span>
+            <span className="text-base sm:text-lg font-bold text-yellow-700">{coins}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="bg-blue-100 p-1.5 rounded-lg">
-              <Calculator className="w-5 h-5 text-blue-500" />
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="bg-blue-100 p-1 sm:p-1.5 rounded-lg">
+              <Calculator className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
             </div>
-            <span className="text-lg font-bold text-blue-700">Level {level}</span>
+            <span className="text-base sm:text-lg font-bold text-blue-700">Level {level}</span>
             {combo >= 3 && (
-              <div className="flex items-center gap-1 bg-orange-100 py-1 px-2 rounded-lg">
-                <Star className="w-4 h-4 text-orange-500" />
-                <span className="text-sm font-bold text-orange-700">x{combo}</span>
+              <div className="flex items-center gap-1 bg-orange-100 py-0.5 sm:py-1 px-1.5 sm:px-2 rounded-lg">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />
+                <span className="text-xs sm:text-sm font-bold text-orange-700">x{combo}</span>
               </div>
             )}
           </div>
@@ -339,46 +313,68 @@ function App() {
               setGameState('paused');
               playSound('click');
             }}
-            className="bg-gray-100 hover:bg-gray-200 p-1.5 rounded-lg transition-colors"
+            className="bg-gray-100 hover:bg-gray-200 p-1 sm:p-1.5 rounded-lg transition-colors"
           >
-            <Pause className="w-5 h-5 text-gray-700" />
+            <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
           </button>
         </div>
 
-        <div className="flex-1 flex gap-4 items-center justify-center">
-          <div className="flex-shrink-0">
+        <div className="flex-1 flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center">
+          <div className="flex-shrink-0 w-48 sm:w-64">
             {renderDragon()}
           </div>
 
-          <div className="flex flex-col items-center gap-4 bg-white/90 p-6 rounded-xl shadow-2xl backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-2 sm:gap-4 bg-white/90 p-3 sm:p-6 rounded-xl shadow-2xl backdrop-blur-sm">
             {problem && (
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-800 mb-3">
+                <div className="text-2xl sm:text-3xl font-bold text-blue-800 mb-2 sm:mb-3">
                   {problem.a} {problem.operator} {problem.b} = ?
                 </div>
                 <input
                   type="text"
                   value={answer}
                   readOnly
-                  className="w-28 text-3xl text-center bg-white rounded-lg py-1.5 px-3 shadow-lg mb-3"
+                  className="w-20 sm:w-28 text-2xl sm:text-3xl text-center bg-white rounded-lg py-1 sm:py-1.5 px-2 sm:px-3 shadow-lg mb-2 sm:mb-3"
                   placeholder="?"
                 />
                 {isCorrect !== null && (
-                  <div className={`text-lg font-bold ${isCorrect ? 'text-green-500' : 'text-red-500'} animate-fade-in`}>
+                  <div className={`text-base sm:text-lg font-bold ${isCorrect ? 'text-green-500' : 'text-red-500'} animate-fade-in`}>
                     {isCorrect ? 'Correct! 🎉' : `Oops! The answer is ${problem.answer}`}
-                    <div className="text-sm mt-1 text-gray-600">{problem.explanation}</div>
+                    <div className="text-xs sm:text-sm mt-1 text-gray-600">{problem.explanation}</div>
                   </div>
                 )}
               </div>
             )}
 
-            {renderKeypad()}
+            <div className="grid grid-cols-3 gap-1 w-full max-w-[280px] sm:max-w-xs">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
+                <button
+                  key={num}
+                  onClick={() => handleNumberClick(num)}
+                  className="bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                onClick={handleDelete}
+                className="bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
+              >
+                <Delete className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+              <button
+                onClick={handleCheck}
+                className="bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-2 sm:py-3 px-2 sm:px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95 flex items-center justify-center"
+              >
+                <Check className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </div>
           </div>
         </div>
 
         {showReward && (
           <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
-            <div className="animate-bounce text-7xl filter drop-shadow-lg">🌟</div>
+            <div className="animate-bounce text-7xl filter drop-shadow-lg">��</div>
           </div>
         )}
       </div>
